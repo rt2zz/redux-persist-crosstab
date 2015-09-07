@@ -1,0 +1,26 @@
+{
+  "name": "redux-persist-crosstab",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rt2zz/redux-persist-crosstab.git"
+  },
+  "homepage": "https://github.com/rt2zz/redux-persist-crosstab",
+  "keywords": [
+    "redux",
+    "localstorage",
+    "redux-persist",
+    "redux-storage",
+    "redux-rehydrate"
+  ],
+  "peerDependencies": {
+    "redux-persist": ">0.5.0"
+  },
+  "author": "rt2zz <zack@root-two.com>",
+  "license": "MIT"
+}
