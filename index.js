@@ -16,16 +16,21 @@ module.exports = function(persistor, config) {
   }, false);
 
   window.addEventListener('storage', function (event) {
-    if (isFocused || !event.newValue) return;
+    if (isFocused) return;
+    //|| !event.newValue
+    console.log('isFocused::: ', isFocused);
+    console.log('handleStorageEvent::: key ', event.key);
+    console.log('handleStorageEvent::: oldValue ', event.oldValue);
+    console.log('handleStorageEvent::: newValue ', event.newValue);
 
     if (event.key.indexOf(keyPrefix) === 0) {
       var keyspace = event.key.substr(keyPrefix.length);
       if (whitelist && whitelist.indexOf(keyspace) === -1) { return; }
       if (blacklist && blacklist.indexOf(keyspace) !== -1) { return; }
-
+      // rehydrate storage with the new value
       persistor.rehydrate(keyspace, event.newValue, function (oldState, newState) {
         // @TODO handle errors?
       });
     }
   }, false);
-}
+};
