@@ -18,11 +18,11 @@ module.exports = function(persistor, config) {
   window.addEventListener('storage', function (event) {
     if (isFocused) return;
     if (event.key.indexOf(keyPrefix) === 0) {
-      var keyspace = event.key.substr(keyPrefix.length);
-      if (whitelist && whitelist.indexOf(keyspace) === -1) { return; }
-      if (blacklist && blacklist.indexOf(keyspace) !== -1) { return; }
+      var keySpace = event.key.substr(keyPrefix.length);
+      if (whitelist && whitelist.indexOf(keySpace) === -1) { return; }
+      if (blacklist && blacklist.indexOf(keySpace) !== -1) { return; }
       // rehydrate storage with the new value
-      persistor.rehydrate(keyspace, event.newValue, function (oldState, newState) {
+      persistor.rehydrate(keySpace, event.newValue, function (key, state) {
         // @TODO handle errors?
       });
     }
