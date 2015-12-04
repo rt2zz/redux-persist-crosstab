@@ -17,12 +17,18 @@ module.exports = function(persistor, config) {
 
   window.addEventListener('storage', function (event) {
     if (isFocused) return;
+    //|| !event.newValue
+    console.log('isFocused::: ', isFocused);
+    console.log('handleStorageEvent::: key ', event.key);
+    console.log('handleStorageEvent::: oldValue ', event.oldValue);
+    console.log('handleStorageEvent::: newValue ', event.newValue);
+
     if (event.key.indexOf(keyPrefix) === 0) {
-      var keySpace = event.key.substr(keyPrefix.length);
-      if (whitelist && whitelist.indexOf(keySpace) === -1) { return; }
-      if (blacklist && blacklist.indexOf(keySpace) !== -1) { return; }
+      var keyspace = event.key.substr(keyPrefix.length);
+      if (whitelist && whitelist.indexOf(keyspace) === -1) { return; }
+      if (blacklist && blacklist.indexOf(keyspace) !== -1) { return; }
       // rehydrate storage with the new value
-      persistor.rehydrate(keySpace, event.newValue, function (key, state) {
+      persistor.rehydrate(keyspace, event.newValue, function (oldState, newState) {
         // @TODO handle errors?
       });
     }

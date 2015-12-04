@@ -19,7 +19,8 @@
     "redux-rehydrate"
   ],
   "peerDependencies": {
-    "redux-persist": ">0.5.0"
+    "redux-persist": ">0.5.0",
+    "generate-uuid": "1.x"
   },
   "author": "rt2zz <zack@root-two.com>",
   "license": "MIT"
