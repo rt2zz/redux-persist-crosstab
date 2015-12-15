@@ -15,16 +15,18 @@ module.exports = function(persistor, config) {
     isMaster: false,
     checkTimeout: null,
     pingTimeout: null
-  }
+  };
 
   var control = {
     check: function () {
-      var now = +new Date(), takeMaster = true, id;
-      for (id in others) {
-        if (others[id] + 23000 < now) {
-          delete others[id];
-        } else if (id < guid) {
-          takeMaster = false;
+      var now = +new Date(), takeMaster = true;
+      for (var id in others) {
+        if (others.hasOwnProperty(id)) {
+          if (others[id] + 23000 < now) {
+            delete others[id];
+          } else if (id < guid) {
+            takeMaster = false;
+          }
         }
       }
 
