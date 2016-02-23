@@ -13,8 +13,10 @@ module.exports = function(persistor, config){
       var keyspace = e.key.substr(keyPrefix.length)
       if(whitelist && whitelist.indexOf(keyspace) === -1){ return }
       if(blacklist && blacklist.indexOf(keyspace) !== -1){ return }
-      
-      persistor.rehydrate(keyspace, e.newValue, function(){
+
+      var statePartial = {}
+      statePartial[keyspace] = e.newValue
+      persistor.rehydrate(statePartial, function(){
         //@TODO handle errors?
       })
     }
