@@ -16,9 +16,7 @@ module.exports = function(persistor, config){
 
       var statePartial = {}
       statePartial[keyspace] = e.newValue
-      persistor.rehydrate(statePartial, function(){
-        //@TODO handle errors?
-      })
+      persistor.rehydrate(statePartial, {serial: true})
     }
   }
 }
