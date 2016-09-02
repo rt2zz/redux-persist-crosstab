@@ -1,6 +1,6 @@
 {
   "name": "redux-persist-crosstab",
-  "version": "3.5.0",
+  "version": "3.5.1",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -19,7 +19,7 @@
     "redux-rehydrate"
   ],
   "peerDependencies": {
-    "redux-persist": ">3.5.0"
+    "redux-persist": ">=3.5.0"
   },
   "author": "rt2zz <zack@root-two.com>",
   "license": "MIT"
