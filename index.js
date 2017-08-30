@@ -10,7 +10,7 @@ module.exports = function(persistor, config){
   window.addEventListener('storage', handleStorageEvent, false)
 
   function handleStorageEvent(e){
-    if(e.key.indexOf(keyPrefix) === 0){
+    if(e.key && e.key.indexOf(keyPrefix) === 0){
       var keyspace = e.key.substr(keyPrefix.length)
       if(whitelist && whitelist.indexOf(keyspace) === -1){ return }
       if(blacklist && blacklist.indexOf(keyspace) !== -1){ return }
