@@ -14,6 +14,7 @@ module.exports = function(persistor, config){
       var keyspace = e.key.substr(keyPrefix.length)
       if(whitelist && whitelist.indexOf(keyspace) === -1){ return }
       if(blacklist && blacklist.indexOf(keyspace) !== -1){ return }
+      if(e.oldValue === e.newValue){ return }
 
       var statePartial = {}
       statePartial[keyspace] = e.newValue
