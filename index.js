@@ -20,13 +20,6 @@ module.exports = function (store: Store, persistConfig: PersistConfig, crosstabC
 
   function handleStorageEvent (e) {
     if (e.key && e.key.indexOf(keyPrefix) === 0) {
-      const keyspace: string = e.key.substr(keyPrefix.length)
-      if (whitelist && whitelist.indexOf(keyspace) === -1) {
-        return
-      }
-      if (blacklist && blacklist.indexOf(keyspace) !== -1) {
-        return
-      }
       if (e.oldValue === e.newValue) {
         return
       }
@@ -36,7 +29,15 @@ module.exports = function (store: Store, persistConfig: PersistConfig, crosstabC
       /* eslint-disable flowtype/no-weak-types */
       const state: Object = Object.keys(statePartial).reduce((state, reducerKey) => {
         /* eslint-enable flowtype/no-weak-types */
+        if (whitelist && whitelist.indexOf(reducerKey) === -1) {
+          return state
+        }
+        if (blacklist && blacklist.indexOf(reducerKey) !== -1) {
+          return state
+        }
+
         state[reducerKey] = JSON.parse(statePartial[reducerKey])
+
         return state
       }, {})
 
