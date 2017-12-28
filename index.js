@@ -1,4 +1,4 @@
-var constants = require('redux-persist/constants')
+var constants = require('redux-persist/lib/constants')
 var KEY_PREFIX = constants.KEY_PREFIX
 
 module.exports = function(persistor, config){
