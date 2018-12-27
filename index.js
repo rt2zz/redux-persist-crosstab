@@ -1,20 +1,11 @@
-// @flow
 import { KEY_PREFIX, REHYDRATE } from 'redux-persist/lib/constants'
-import type { PersistConfig } from 'redux-persist/es/types'
-import type { Store } from 'redux'
 
-type CrosstabConfig = {
-  blacklist?: ?Array<string>,
-  keyPrefix?: ?string,
-  whitelist?: ?Array<string>,
-}
+module.exports = function (store, persistConfig, crosstabConfig = {}) {
+  const blacklist = crosstabConfig.blacklist || null
+  const whitelist = crosstabConfig.whitelist || null
+  const keyPrefix = crosstabConfig.keyPrefix || KEY_PREFIX
 
-module.exports = function (store: Store, persistConfig: PersistConfig, crosstabConfig: CrosstabConfig = {}) {
-  const blacklist: ?Array<string> = crosstabConfig.blacklist || null
-  const whitelist: ?Array<string> = crosstabConfig.whitelist || null
-  const keyPrefix: string = crosstabConfig.keyPrefix || KEY_PREFIX
-
-  const { key }: { key: string } = persistConfig
+  const { key } = persistConfig
 
   window.addEventListener('storage', handleStorageEvent, false)
 
@@ -24,11 +15,9 @@ module.exports = function (store: Store, persistConfig: PersistConfig, crosstabC
         return
       }
 
-      const statePartial: { [string]: string } = JSON.parse(e.newValue)
+      const statePartial = JSON.parse(e.newValue)
 
-      /* eslint-disable flowtype/no-weak-types */
-      const state: Object = Object.keys(statePartial).reduce((state, reducerKey) => {
-        /* eslint-enable flowtype/no-weak-types */
+      const state = Object.keys(statePartial).reduce((state, reducerKey) => {
         if (whitelist && whitelist.indexOf(reducerKey) === -1) {
           return state
         }
